@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const video = document.getElementById("video");
     const overlay = document.getElementById("overlay");
     const statusMessage = document.getElementById("statusMessage");
-    const faceDetection = new FaceDetection.FaceDetection({ model: 'short' });
+
+    // Load Mediapipe Face Detection
+    const faceDetection = new FaceDetection.FaceDetector({ model: 'short' });
 
     // Navigate to Camera Page
     continueBtn.addEventListener("click", () => {
@@ -30,12 +32,16 @@ document.addEventListener("DOMContentLoaded", () => {
         ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
 
         // Detect Face
-        const faces = await faceDetection.detect(canvas);
-        if (faces.length > 0) {
-            const base64Image = canvas.toDataURL();
-            sendImage(base64Image);
-        } else {
-            alert("No face detected! Please try again.");
+        try {
+            const faces = await faceDetection.detect(canvas);
+            if (faces.length > 0) {
+                const base64Image = canvas.toDataURL();
+                sendImage(base64Image);
+            } else {
+                alert("No face detected! Please try again.");
+            }
+        } catch (error) {
+            console.error("Error detecting faces:", error);
         }
     });
 
