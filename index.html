@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Capture App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="page1" class="page">
+            <button id="continueBtn" class="round-button">Continue</button>
+        </div>
+
+        <div id="page2" class="page hidden">
+            <div class="camera-container">
+                <video id="video" autoplay></video>
+                <canvas id="overlay"></canvas>
+                <button id="captureBtn">Capture Photo</button>
+            </div>
+        </div>
+
+        <div id="page3" class="page hidden">
+            <div id="statusMessage"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
